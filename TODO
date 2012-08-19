@@ -1,0 +1,5 @@
+TODO
+* Test in non development environment linux machine
+* 32 bit and 64 bit Makefile
+* Test OSX compability
+* User configuration file support

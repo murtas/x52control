@@ -54,14 +54,17 @@ DEFINES		+= -DVERSION='"$(VERSION)"'
 INCLUDES	+= -I./src
 INCLUDES	+= -I./libx52
 INCLUDES	+= -I./libx52/include
+INCLUDES	+= -I./SDK/CHeaders/XPLM
+INCLUDES	+= -I./SDK/CHeaders/Widgets
 
 OUTDIR		:= ./build
 BUILDDIR	:= $(OUTDIR)/$(CONF)
 
 # common flags
 CFLAGS		:= -pipe -Wall -g -O3 -fPIC
+CFLAGS          += -DIBM=0 -DAPL=0 -DLIN=1 -DXPLM200=1
 ifdef PLAT_LINUX
-CFLAGS		+= -m32
+CFLAGS		+= -m64 # 32 bits m32
 endif
 ifdef PLAT_DARWIN
 CFLAGS		+= -mmacosx-version-min=10.4
@@ -75,7 +78,7 @@ CFLAGS		+= -fomit-frame-pointer
 CFLAGS		+= -fstrict-aliasing
 ifdef PLAT_DARWIN
 ifdef DIST
-CFLAGS		+= -arch i386 -arch ppc
+CFLAGS		+= -arch i386 -arch x86_64 #32 bits i386 ppc
 endif
 endif
 endif #RELEASE
