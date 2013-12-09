@@ -111,24 +111,12 @@ try_update(float elapsed_lastcall, float elapsed_lastloop, int loop, void* arg)
     
     if (acf_gear_retract)
     {
-        // check existance of landing gears not retracted
-        i = 0;
-        while (i < acf_gear_count && acf_gear_deploy[i] > 0.02f) 
-        {
-            i++;
-            break;
-        }
+        for (i = 0; i < acf_gear_count && acf_gear_deploy[i] > 0.97f; i++);
 
-
-        if (i > 0) // at least one landing gear is not fully retracted
-        {
-            for (i = 0; i < acf_gear_count && acf_gear_deploy[i] > 0.97f; i++);
-
-            if (i == acf_gear_count)
-                leds |= x52i_led_E_green | x52i_led_clutch_green;
-            else
-                leds |= x52i_led_E_amber | x52i_led_clutch_amber;
-        }
+        if (i == acf_gear_count)
+            leds |= x52i_led_E_green | x52i_led_clutch_green;
+        else
+            leds |= x52i_led_E_amber | x52i_led_clutch_amber;
     }
 
     switch (acf_engine_reverse)
